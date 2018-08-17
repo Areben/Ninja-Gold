@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ninja Gold</title>
+</head>
+<body>
+	<h2>Your Total Gold: {{ request.session.total }}</h2>
+
+	<form action="farm" method="POST">
+		{% csrf_token %}
+		<label for="farm">Farm: (earns 10-20 gold!)</label>
+		<input type="submit" name="farm">
+	</form><br>
+
+	<form action="cave" method="POST">
+		{% csrf_token %}
+		<label for="cave">Cave: (earns 5-10 gold!)</label>
+		<input type="submit" name="cave">
+	</form><br>
+
+	<form action="house" method="POST">
+		{% csrf_token %}
+		<label for="house">House: (earns 2-5 gold!)</label>
+		<input type="submit" name="house">
+	</form><br>
+
+	<form action="casino" method="POST">
+		{% csrf_token %}
+		<label for="casino">Farm: (earns or takes 50 gold!)</label>
+		<input type="submit" name="casino">
+	</form>
+
+	<p>---------------------------------------------------------------</p>
+
+	{% for i in request.session.count %}
+	<p style="color: {{ i.color }}">
+	Result is {{ i.gold }} 
+	gold from the {{ i.name }} 
+	({{ time }})
+	</p>
+	{% endfor %}
+
+</body>
+</html>
